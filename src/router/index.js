@@ -1,19 +1,75 @@
+import HomeLayout from '@/modules/home/layouts/HomeLayout'
+// import getProducts from '@/modules/products/services/getProducts'
+
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeLayout,
+    children: [
+      {
+        path: 'home',
+        name: 'homePage',
+        component: () => import('@/modules/home/pages/HomePage')
+      },
+      {
+        path: 'about',
+        name: 'aboutPage',
+        component: () => import('@/modules/home/pages/AboutPage')
+      },
+      {
+        path: 'register',
+        name: 'registerPage',
+        component: () => import('@/modules/home/pages/RegisterPage')
+      },
+      {
+        path: 'login',
+        name: 'loginPage',
+        component: () => import('@/modules/home/pages/LoginPage')
+      },
+      {
+        path: '',
+        name: 'homeRedirect',
+        redirect: { name: 'homePage' }
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/app',
+    name: 'products',
+    component: () => import('@/modules/products/layouts/ProductLayout'),
+    children: [
+      {
+        path: 'home',
+        name: 'productsHome',
+        component: () => import('@/modules/products/pages/HomePage')
+      },
+      {
+        path: 'home/:id',
+        name: 'productById',
+        component: () => import('@/modules/products/pages/ProductPage'),
+        props: (route) => {
+          const id = Number(route.params.id)
+          return isNaN(id) ? { id: 1 } : { id }
+        }
+      },
+      {
+        path: 'home',
+        name: 'productsHomeRedirect',
+        redirect: { name: 'productsHome' }
+      },
+      {
+        path: '',
+        name: 'productsHomeRedirectSec',
+        redirect: { name: 'productsHome' }
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/modules/shared/PageNotFound')
   }
 ]
 
