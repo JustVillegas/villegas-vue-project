@@ -6,7 +6,7 @@
       <a class="nav-link">Create Product</a>
     </nav>
     <div class="account">
-      <router-link class="button" :to="{name: 'homePage'}">Log out</router-link>
+      <router-link @click="logout" class="button" :to="{name: 'homePage'}">Log out</router-link>
     </div>
   </header>
   <router-view/>
@@ -22,7 +22,11 @@ export default {
   methods: {
     ...mapActions('products', {
       products: 'fetchProducts'
+    }),
+    ...mapActions('auth', {
+      logout: 'logout'
     })
+
   }
 }
 </script>
@@ -58,5 +62,20 @@ nav a {
 
 .button:hover {
   cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 20px 20px;
+  }
+
+  nav {
+    margin: 20px 0;
+  }
+
+  .button {
+    margin-top: 20px;
+  }
 }
 </style>

@@ -10,8 +10,8 @@
       <button>Futuro filtro 2</button>
       <button>Futuro filtro 3</button>
     </div>
-    <ul>
-      <Product v-for="pro in products" :key="pro.id" :product="{
+    <ul class="products">
+      <Product class="product-card" v-for="pro in products" :key="pro.id" :product="{
         title: pro.title,
         image: pro.image,
         description: pro.description,
@@ -97,6 +97,25 @@ section {
   padding: 10px 20px;
   border: 0;
   margin: 0 15px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .filter-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  .btn-filter {
+    margin: 0 20px;
+  }
+  .products {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
 }
 
 </style>

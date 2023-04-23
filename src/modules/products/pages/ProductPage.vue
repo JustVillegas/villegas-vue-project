@@ -21,7 +21,7 @@
       <div class="wrapper">
         <label for="price">Price</label>
         <input type="number" name="price" id="price" min="0" :placeholder="selectedProduct.price" v-model="newPrice">
-        <label for="price" class="info-price"><span class="adv info-price"></span>If you put a negative number it wont be updated</label>
+        <label for="price" class="info-price"><span class="adv info-price"></span>If you put a negative number it won't be updated</label>
       </div>
       <div class="wrapper">
         <label for="desc">Description</label>
@@ -243,5 +243,39 @@ input {
   font-size: 12px;
   color: #3f3f3f;
   align-items: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .product {
+    flex-direction: column;
+    margin: 50px 0;
+  }
+
+  .image {
+    width: 90%;
+    margin: 0;
+  }
+
+  .info {
+    width: 90%;
+  }
+
+  .popup {
+    width: 90%;
+    height: 90%;
+    margin: 20px 5px;
+  }
+  .wrapper {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

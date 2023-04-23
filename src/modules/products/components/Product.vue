@@ -75,4 +75,38 @@ export default {
 .view:hover {
   cursor: pointer;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .product {
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    justify-content: center;
+    border: 1px solid #616161;
+    padding: 10px 0;
+  }
+
+  .image {
+    width: 50%;
+    margin: 0;
+  }
+
+  .info {
+    width: 95%;
+  }
+
+  .buttons {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .view {
+    padding: 10px 20px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
 </style>

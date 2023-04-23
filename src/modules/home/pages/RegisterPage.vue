@@ -36,6 +36,7 @@
 
 <script>
 import { GoogleAuthProvider, getAuth, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -45,12 +46,16 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('auth', ['setToken']),
     registerWithEmail () {
       const auth = getAuth()
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then((userCredential) => {
           const user = userCredential.user
           console.log(user)
+          const token = userCredential.user.getIdToken()
+          this.setToken(token)
+          console.log(token)
           this.$router.push({ name: 'productsHome' })
         })
         .catch((error) => {
@@ -66,6 +71,7 @@ export default {
         .then((result) => {
           const credential = GoogleAuthProvider.credentialFromResult(result)
           const token = credential.accessToken
+          this.setToken(token)
           console.log(token)
           const user = result.user
           console.log(user)
@@ -74,6 +80,9 @@ export default {
           console.log(error)
         })
     }
+  },
+  computed: {
+    ...mapState('auth', ['token'])
   }
 }
 </script>
