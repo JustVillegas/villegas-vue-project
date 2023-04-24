@@ -3,7 +3,7 @@
     <h1>Products App</h1>
     <nav>
       <router-link class="nav-link" :to="{name: 'productsHome'}">Productos</router-link>
-      <a class="nav-link">Create Product</a>
+      <router-link class="nav-link" :to="{name: 'productsCrud'}">CRUD</router-link>
     </nav>
     <div class="account">
       <router-link @click="logout" class="button" :to="{name: 'homePage'}">Log out</router-link>

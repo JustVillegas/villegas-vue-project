@@ -56,6 +56,11 @@ const routes = [
         }
       },
       {
+        path: 'crud',
+        name: 'productsCrud',
+        component: () => import('@/modules/products/pages/CrudPage')
+      },
+      {
         path: 'home',
         name: 'productsHomeRedirect',
         redirect: { name: 'productsHome' }

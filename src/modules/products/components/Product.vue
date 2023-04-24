@@ -6,20 +6,35 @@
       <p class="desc">{{ product.description }}</p>
       <p class="price">${{ product.price }}</p>
     </div>
-    <div class="buttons">
-      <router-link class="view" :to="{name: 'productById', params: {id:product.id}}">View</router-link>
-
+    <div class="buttons" :class="crudBtn ? 'crudbtns' : ''">
+      <router-link v-if="!crudBtn" :class="!crudBtn ? 'view' : ''" :to="{name: 'productById', params: {id:product.id}}">View</router-link>
+      <button class="button-crud editbtn" v-if="crudBtn">Edit</button>
+      <button @click="deleteProductById" class="button-crud deletebtn" v-if="crudBtn">Delete</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'ProductComponent',
   props: {
     product: {
       type: Object,
       required: true
+    },
+    crudBtn: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    ...mapActions('products', {
+      deleteProduct: 'fetchDeleteProduct',
+      updateProduct: 'fetchUpdateProduct'
+    }),
+    deleteProductById () {
+      this.deleteProduct(this.product.id)
     }
   }
 }
@@ -64,12 +79,39 @@ export default {
   justify-content: center;
   margin-left: 20px;
 }
+
+.button-crud {
+  border: 0;
+  padding: 12px 28px;
+  margin: 5px 0;
+  color: #ffffff;
+  width: 100%;
+}
+
+.editbtn {
+  background: #0a1361;
+  margin: 5px;
+}
+
+.editbtn:hover {
+  cursor: pointer;
+}
+
+.deletebtn {
+  background: #a31414;
+  margin: 5px;
+}
+
+.deletebtn:hover {
+  cursor: pointer;
+}
 .view {
   background: #0517be;
   border: 0;
   padding: 12px 28px;
   margin: 5px 0;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .view:hover {
@@ -98,6 +140,10 @@ export default {
   .buttons {
     margin: 0;
     font-size: 1rem;
+  }
+
+  .crudbtns {
+    flex-direction: row;
   }
 
   .view {

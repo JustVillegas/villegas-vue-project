@@ -72,6 +72,11 @@ export default {
       } else if (this.isActive === true) {
         this.isActive = false
       }
+
+      this.newTitle = ''
+      this.newPrice = ''
+      this.newDesc = ''
+      this.newImg = ''
     },
     getInfo ({ newTitle, newPrice, newDesc, newImg }) {
       if (newTitle === '' || newTitle === undefined) {

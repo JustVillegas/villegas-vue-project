@@ -16,3 +16,12 @@ export const updateProduct = (state, val) => {
   })
   state.selectedProduct = val
 }
+
+export const deleteProduct = (state, val) => {
+  state.products = state.products.filter(product => product.id !== val)
+  state.selectedProduct = {}
+}
+
+export const addProduct = (state, val) => {
+  state.products.push(val)
+}

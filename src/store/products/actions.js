@@ -17,3 +17,17 @@ export const fetchUpdateProduct = async ({ commit }, newProduct) => {
   commit('setProduct', newProduct)
   commit('updateProduct', newProduct)
 }
+
+export const fetchDeleteProduct = async ({ commit }, id) => {
+  commit('deleteProduct', id)
+}
+
+export const fetchAddProduct = async ({ commit }, product) => {
+  commit('addProduct', product)
+}
+
+export const searchProduct = async ({ commit }, search) => {
+  const productsList = await getProducts()
+  const filteredProducts = productsList.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
+  commit('setProducts', filteredProducts)
+}
